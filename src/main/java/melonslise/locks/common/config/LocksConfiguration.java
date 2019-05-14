@@ -32,6 +32,9 @@ public class LocksConfiguration
 		@Config.Comment("Chance of a lock pick to not break")
 		public float lock_pick_strength = 0.65F;
 
+		@Config.Comment("Chance of a lock pick to not break")
+		public float lock_pick_strength_2 = 0F;
+
 		@Config.Comment("Maximum allowed volume of a single lock")
 		public int lockable_volume = 4;
 

@@ -1,8 +1,16 @@
 package melonslise.locks.common.item;
 
-import java.util.ArrayList;
-
 import com.google.common.base.Predicates;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 import melonslise.locks.common.config.LocksConfiguration;
 import melonslise.locks.common.container.ContainerLockPicking;
@@ -16,20 +24,15 @@ import melonslise.locks.utility.LocksUtilities;
 import melonslise.locks.utility.predicate.LocksSelectors;
 import melonslise.locks.utility.predicate.PredicateIntersecting;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-public abstract class ItemLockPick extends LocksItem {
-    public ItemLockPick(String name) {
+public class ItemLockPickWeak extends ItemLockPick {
+    public ItemLockPickWeak(String name) {
         super(name);
     }
 
-    public abstract float getStrength(World world);
+    @Override
+    public float getStrength(World world) {
+        return LocksConfiguration.getMain(world).lock_pick_strength_2;
+    }
 
     // TODO container open event
     @Override

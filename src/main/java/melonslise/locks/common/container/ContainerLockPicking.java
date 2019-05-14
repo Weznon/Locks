@@ -77,6 +77,8 @@ public class ContainerLockPicking extends Container
 	{
 		for(ItemStack stack : player.inventoryContainer.getInventory())
 		{
+			//need to keep track better of which pick type is being used. either only use the ones in players hands, or add something to gui, or something
+			//only the thing in players hand is used is easier - make sure to make checks other places as well though
 			if(!(stack.getItem() instanceof ItemLockPick)) continue;
 			if(ThreadLocalRandom.current().nextFloat() <= ((ItemLockPick) stack.getItem()).getStrength(player.world)) return false;
 			this.player.renderBrokenItemStack(stack);
