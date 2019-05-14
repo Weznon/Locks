@@ -61,7 +61,7 @@ public class MessageLockPicking implements IMessage
 					if(lockables.isEmpty()) return;
 					ContainerLockPicking container = new ContainerLockPicking(mc.player, message.position, lockables.get(0), (ItemLockPick) mc.player.getHeldItemMainhand().getItem());
 					container.windowId = message.id;
-					mc.displayGuiScreen(new GuiLockPicking(container));
+					mc.displayGuiScreen(new GuiLockPicking(container, (ItemLockPick) mc.player.getHeldItemMainhand().getItem()));
 				}
 			};
 			mc.addScheduledTask(runnable);

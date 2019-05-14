@@ -9,6 +9,8 @@ import melonslise.locks.client.gui.api.sprite.Texture;
 import melonslise.locks.client.gui.sprite.SpriteLockPick;
 import melonslise.locks.client.gui.sprite.SpritePin;
 import melonslise.locks.common.container.ContainerLockPicking;
+import melonslise.locks.common.item.ItemLockPick;
+import melonslise.locks.common.item.ItemLockPickStrong;
 import melonslise.locks.common.network.LocksNetworks;
 import melonslise.locks.common.network.server.MessageCheckPin;
 import melonslise.locks.utility.LocksUtilities;
@@ -33,14 +35,20 @@ public class GuiLockPicking extends GuiContainer // TODO EVENTS
 	protected int textureWidth, textureHeight;
 
 	protected Texture outerLock = new Texture(24, 0, 24, 120), innerLock = new Texture(0, 0, 24, 64), spring = new Texture(48, 48, 12, 24), edge = new Texture(0 ,0 , 12, 64), pin = new Texture(48, 0, 12, 48);
-	protected SpriteLockPick lockPick = new SpriteLockPick(new Texture(60, 0, 192, 24));
+	protected SpriteLockPick lockPick;
 	protected SpritePin[] pins;
 
 	protected int currentPin;
 
-	public GuiLockPicking(ContainerLockPicking container)
+	public GuiLockPicking(ContainerLockPicking container, ItemLockPick pick)
 	{
+
 		super(container);
+		if (pick instanceof ItemLockPickStrong) {
+			this.lockPick = new SpriteLockPick(new Texture(60, 0, 192, 24));
+		} else {
+			this.lockPick = new SpriteLockPick(new Texture(60, 24, 192, 24));
+		}
 		this.setLength(container.lockable.lock.getLength());
 	}
 
