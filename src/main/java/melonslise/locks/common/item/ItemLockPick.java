@@ -37,7 +37,7 @@ public abstract class ItemLockPick extends LocksItem {
         ArrayList<Lockable> lockables = StorageLockables.get(world).matching(Predicates.and(new PredicateIntersecting(new Box(position)), LocksSelectors.LOCKED));
         if (lockables.isEmpty()) return EnumActionResult.FAIL;
         if (!(player instanceof EntityPlayerMP)) return EnumActionResult.SUCCESS;
-        ContainerLockPicking container = new ContainerLockPicking(player, position, lockables.get(0));
+        ContainerLockPicking container = new ContainerLockPicking(player, position, lockables.get(0), this);
         if (!container.canInteractWith(player)) return EnumActionResult.FAIL;
         LocksUtilities.openContainer((EntityPlayerMP) player, container);
         LocksNetworks.network.sendTo(new MessageLockPicking(container), (EntityPlayerMP) player);

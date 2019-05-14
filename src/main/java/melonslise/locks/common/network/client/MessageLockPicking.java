@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import io.netty.buffer.ByteBuf;
 import melonslise.locks.client.gui.GuiLockPicking;
 import melonslise.locks.common.container.ContainerLockPicking;
+import melonslise.locks.common.item.ItemLockPick;
 import melonslise.locks.common.world.storage.Box;
 import melonslise.locks.common.world.storage.Lockable;
 import melonslise.locks.common.world.storage.StorageLockables;
@@ -58,7 +59,7 @@ public class MessageLockPicking implements IMessage
 				{
 					ArrayList<Lockable> lockables = StorageLockables.get(mc.world).matching(new PredicateIntersecting(new Box(message.position)));
 					if(lockables.isEmpty()) return;
-					ContainerLockPicking container = new ContainerLockPicking(mc.player, message.position, lockables.get(0));
+					ContainerLockPicking container = new ContainerLockPicking(mc.player, message.position, lockables.get(0), (ItemLockPick) mc.player.getHeldItemMainhand().getItem());
 					container.windowId = message.id;
 					mc.displayGuiScreen(new GuiLockPicking(container));
 				}

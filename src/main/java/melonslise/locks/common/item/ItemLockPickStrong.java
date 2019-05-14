@@ -33,16 +33,4 @@ public class ItemLockPickStrong extends ItemLockPick {
         return LocksConfiguration.getMain(world).lock_pick_strength;
     }
 
-    // TODO container open event
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos position, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ArrayList<Lockable> lockables = StorageLockables.get(world).matching(Predicates.and(new PredicateIntersecting(new Box(position)), LocksSelectors.LOCKED));
-        if (lockables.isEmpty()) return EnumActionResult.FAIL;
-        if (!(player instanceof EntityPlayerMP)) return EnumActionResult.SUCCESS;
-        ContainerLockPicking container = new ContainerLockPicking(player, position, lockables.get(0));
-        if (!container.canInteractWith(player)) return EnumActionResult.FAIL;
-        LocksUtilities.openContainer((EntityPlayerMP) player, container);
-        LocksNetworks.network.sendTo(new MessageLockPicking(container), (EntityPlayerMP) player);
-        return EnumActionResult.SUCCESS;
-    }
 }

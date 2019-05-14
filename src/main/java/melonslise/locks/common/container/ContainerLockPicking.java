@@ -23,14 +23,16 @@ public class ContainerLockPicking extends Container
 	public final EntityPlayer player;
 	public final BlockPos position;
 	public final Lockable lockable;
+	public final ItemLockPick picktype;
 	protected int currentIndex = 0;
 	protected boolean open;
 
-	public ContainerLockPicking(EntityPlayer player, BlockPos position, Lockable lockable)
+	public ContainerLockPicking(EntityPlayer player, BlockPos position, Lockable lockable, ItemLockPick picktype)
 	{
 		this.player = player;
 		this.position = position;
 		this.lockable = lockable;
+		this.picktype = picktype;
 	}
 
 	// TODO block exist
@@ -40,7 +42,7 @@ public class ContainerLockPicking extends Container
 	{
 		if(player.getDistanceSqToCenter(this.position) > 9D) return false;
 		Iterator<ItemStack> iterator = player.inventoryContainer.getInventory().iterator();
-		while(iterator.hasNext()) if(iterator.next().getItem() instanceof ItemLockPick) return true;
+		while(iterator.hasNext()) if(iterator.next().getItem() == picktype) return true;
 		return false;
 	}
 
@@ -79,7 +81,7 @@ public class ContainerLockPicking extends Container
 		{
 			//need to keep track better of which pick type is being used. either only use the ones in players hands, or add something to gui, or something
 			//only the thing in players hand is used is easier - make sure to make checks other places as well though
-			if(!(stack.getItem() instanceof ItemLockPick)) continue;
+			if(!(stack.getItem() == this.picktype)) continue;
 			if(ThreadLocalRandom.current().nextFloat() <= ((ItemLockPick) stack.getItem()).getStrength(player.world)) return false;
 			this.player.renderBrokenItemStack(stack);
 			stack.shrink(1);
