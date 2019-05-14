@@ -4,6 +4,7 @@ itemGroup.locks=Locks
 # Items
 item.locks.lock.name=Lock
 item.locks.lock_pick.name=Lock Pick
+item.locks.lock_pick_2.name=Lock Pick 2
 item.locks.key.name=Key
 item.locks.master_key.name=Master Key
 item.locks.key_blank.name=Key Blank
